@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site, treatments } from '../../data/site.js';
+---
+<Base title="Behandlungen – Next Fertility Bregenz" description="Alle Kinderwunschbehandlungen auf einen Blick: IVF, ICSI, Eizellspende, Eizellvorsorge, Andrologie, Hysteroskopie, Genetik und mehr.">
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Behandlungen</span>
+        <h2>Unser gesamtes Behandlungsspektrum</h2>
+        <p class="lead">Übersichtlich gebündelt – jede Behandlung nach demselben klaren Schema erklärt: Was, für wen, Ablauf und Antworten auf häufige Fragen.</p>
+      </div>
+      <div class="grid grid-3">
+        {treatments.map((t) => (
+          <a href={`/behandlungen/${t.slug}/`} class="card treatment">
+            <span class="treatment__tag">{t.tag}{t.neu && <em class="treatment__neu">neu</em>}</span>
+            <h3>{t.title}</h3>
+            <p>{t.teaser}</p>
+            <span class="treatment__more">Mehr erfahren →</span>
+          </a>
+        ))}
+      </div>
+      <div class="cta-band">
+        <p>Nicht sicher, was zu Ihnen passt? Das klären wir gemeinsam im kostenlosen Kurzgespräch.</p>
+        <a href={site.bookingKurzgespraech} class="btn btn--primary" target="_blank" rel="noopener">Kurzgespräch buchen</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .treatment { display: flex; flex-direction: column; }
+  .treatment__tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-700); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+  .treatment__neu { font-style: normal; background: var(--rose-600); color: #fff; padding: 0.05rem 0.45rem; border-radius: var(--radius-pill); font-size: 0.65rem; }
+  .treatment p { font-size: 0.94rem; color: var(--ink-500); flex-grow: 1; }
+  .treatment__more { color: var(--rose-700); font-weight: 600; font-size: 0.9rem; }
+  .cta-band { margin-top: 2.5rem; background: var(--rose-100); border-radius: var(--radius-lg); padding: 1.6rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+  .cta-band p { margin: 0; font-weight: 500; font-size: 1.05rem; }
+</style>

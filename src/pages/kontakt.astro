@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import PagePlaceholder from '../components/PagePlaceholder.astro';
+import { site } from '../data/site.js';
+---
+<Base title="Kontakt – Next Fertility Bregenz" description="So erreichen Sie uns in Bregenz – Adresse, Telefon, E-Mail und Patientenportal.">
+  <PagePlaceholder
+    eyebrow="Kontakt"
+    title="So erreichen Sie uns"
+    lead={`${site.address} · Tel. ${site.phone} · ${site.email}`}
+    points={["Termin: Erstgespräch oder kostenloses Kurzgespräch", "Bestandspatient:innen: Patientenportal (portal.ivf.at)", "Anfahrt & Parkmöglichkeiten in Bregenz"]}
+  />
+</Base>

@@ -1,0 +1,232 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, treatments } from '../data/site.js';
+
+const faqs = [
+  { q: 'Was ist ein Kurzgespräch?', a: 'Ein kostenloses, unverbindliches Kurzgespräch, in dem wir Ihre Situation kennenlernen und die nächsten Schritte besprechen – die niederschwellige Möglichkeit, uns kennenzulernen, bevor Sie ein Erstgespräch vereinbaren.' },
+  { q: 'Wie unterscheidet sich das Erstgespräch vom Kurzgespräch?', a: 'Im ausführlichen Erstgespräch mit einer Fachärztin oder einem Facharzt erfassen wir Ihre Vorgeschichte umfassend, besprechen Diagnostik und mögliche Behandlungswege – es ist der Start in Ihre individuelle Behandlung.' },
+  { q: 'Übernimmt die Krankenkasse die Kosten?', a: 'Ein Teil der Kinderwunschbehandlungen wird in Österreich über den IVF-Fonds gefördert, sofern die Voraussetzungen erfüllt sind. Die Details klären wir individuell mit Ihnen.' },
+  { q: 'Wo befindet sich die Klinik?', a: `Wir sind in Bregenz, ${site.address}. Termine und Befunde verwalten bestehende Patient:innen bequem über das Patientenportal.` },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalClinic',
+  name: 'Next Fertility IVF Zech Bregenz',
+  url: 'https://www.ivf.at',
+  telephone: site.phone,
+  email: site.email,
+  medicalSpecialty: 'Reproductive',
+  address: { '@type': 'PostalAddress', streetAddress: 'Römerstraße 2', postalCode: '6900', addressLocality: 'Bregenz', addressCountry: 'AT' },
+  availableService: treatments.map((t) => ({ '@type': 'MedicalProcedure', name: t.title })),
+};
+---
+<Base title="Next Fertility Bregenz – Kinderwunsch, IVF & Eizellspende" jsonld={jsonld}>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__text">
+        <span class="eyebrow">Kinderwunschmedizin in Bregenz</span>
+        <h1>Kompetenz, die Vertrauen schafft – auf Ihrem Weg zum Kind.</h1>
+        <p class="lead">Vom ersten Gedanken bis zur Behandlung begleiten wir Sie persönlich, fachlich fundiert und auf Augenhöhe. Starten Sie unverbindlich mit einem kostenlosen Kurzgespräch.</p>
+        <div class="hero__actions">
+          <a href={site.bookingErstgespraech} class="btn btn--primary btn--lg" target="_blank" rel="noopener">Erstgespräch vereinbaren</a>
+          <a href={site.bookingKurzgespraech} class="btn btn--secondary btn--lg" target="_blank" rel="noopener">Kostenloses Kurzgespräch</a>
+        </div>
+        <ul class="hero__trust">
+          <li>✓ Erfahrenes Fachärzt:innen-Team</li>
+          <li>✓ Eigenes Labor &amp; modernste Diagnostik</li>
+          <li>✓ Persönliche Begleitung</li>
+        </ul>
+      </div>
+      <div class="hero__media" aria-hidden="true">
+        <div class="hero__card hero__card--1"><strong>Kurzgespräch</strong><span>kostenlos &amp; unverbindlich</span></div>
+        <div class="hero__blob"></div>
+        <div class="hero__card hero__card--2"><strong>Patientenportal</strong><span>Befunde &amp; Termine online</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEHANDLUNGEN -->
+  <section class="section" id="behandlungen">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Behandlungen</span>
+        <h2>Alles aus einer Hand – klar und vollständig.</h2>
+        <p class="lead">Was bisher auf viele Seiten verteilt war, finden Sie jetzt gebündelt: von IVF und Eizellspende bis zu Andrologie und Hysteroskopie.</p>
+      </div>
+      <div class="grid grid-4">
+        {treatments.map((t) => (
+          <a href={`/behandlungen/${t.slug}/`} class="card treatment">
+            <span class="treatment__tag">{t.tag}{t.neu && <em class="treatment__neu">neu</em>}</span>
+            <h3>{t.title}</h3>
+            <p>{t.teaser}</p>
+            <span class="treatment__more">Mehr erfahren →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNNEL / DEIN WEG -->
+  <section class="section section--soft" id="ablauf">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Dein Weg zu uns</span>
+        <h2>In drei Schritten – ohne Druck, in Ihrem Tempo.</h2>
+      </div>
+      <div class="grid grid-3 steps">
+        <div class="step">
+          <span class="step__num">1</span>
+          <h3>Kurzgespräch</h3>
+          <p>Kostenlos &amp; unverbindlich. Wir lernen Ihre Situation kennen und beantworten erste Fragen.</p>
+          <a href={site.bookingKurzgespraech} class="step__link" target="_blank" rel="noopener">Kurzgespräch buchen →</a>
+        </div>
+        <div class="step step--highlight">
+          <span class="step__num">2</span>
+          <h3>Erstgespräch</h3>
+          <p>Ausführliches Gespräch mit einer Fachärztin oder einem Facharzt – Diagnostik und Behandlungsweg.</p>
+          <a href={site.bookingErstgespraech} class="step__link" target="_blank" rel="noopener">Erstgespräch vereinbaren →</a>
+        </div>
+        <div class="step">
+          <span class="step__num">3</span>
+          <h3>Behandlung</h3>
+          <p>Ihr individueller Behandlungsplan – persönlich begleitet, mit Befunden &amp; Terminen im Portal.</p>
+          <a href="/ablauf/" class="step__link">Ablauf im Detail →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AKADEMIE -->
+  <section class="section">
+    <div class="container split">
+      <div class="split__media split__media--rose" aria-hidden="true"><span>Fruchtbarkeit &amp; Du</span></div>
+      <div class="split__text">
+        <span class="eyebrow">Gesundheitsakademie</span>
+        <h2>Fruchtbarkeit &amp; Du</h2>
+        <p class="lead">Wissen schafft Sicherheit. In unseren regelmäßigen Webinaren teilen unsere Expert:innen verständlich, was bei Kinderwunsch wirklich zählt – vorwärtsgewandt und auf dem aktuellen Stand der Medizin.</p>
+        <a href={site.webinarZoom} class="btn btn--primary" target="_blank" rel="noopener">Zum nächsten Webinar anmelden</a>
+        <a href="/akademie/" class="btn btn--ghost">Alle Themen &amp; Aufzeichnungen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZUWEISER -->
+  <section class="section section--blue">
+    <div class="container split split--reverse">
+      <div class="split__text">
+        <span class="eyebrow">Für Zuweiser:innen</span>
+        <h2>Partnerschaft auf Augenhöhe.</h2>
+        <p class="lead">Sie betreuen Patient:innen mit Kinderwunsch? Wir bieten klare Überweisungswege, schnelle Rückmeldung und fachlichen Austausch – Ihre Patient:innen bleiben in besten Händen.</p>
+        <a href="/zuweiser/" class="btn btn--primary">Informationen für Zuweiser:innen</a>
+      </div>
+      <div class="split__media split__media--blue" aria-hidden="true"><span>Zuweiser:innen</span></div>
+    </div>
+  </section>
+
+  <!-- WISSEN -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Wissen</span>
+        <h2>Fundiertes Wissen, klar aufbereitet.</h2>
+        <p class="lead">Medizinische Informationen zum schnellen Nachlesen – plus unser Magazin mit Geschichten und Hintergründen rund um den Kinderwunsch.</p>
+      </div>
+      <div class="grid grid-3">
+        <a href="/behandlungen/genetik-pid/" class="card"><h3>Genetik verständlich</h3><p>Was PID und genetische Diagnostik für Ihre Behandlung bedeuten.</p><span class="treatment__more">Mehr erfahren →</span></a>
+        <a href="/behandlungen/eizellspende/" class="card"><h3>Eizellspende von A–Z</h3><p>Ablauf, Voraussetzungen und rechtlicher Rahmen – kompakt erklärt.</p><span class="treatment__more">Mehr erfahren →</span></a>
+        <a href="/wissen/" class="card"><h3>Kinderwunsch-Magazin</h3><p>Erfahrungsberichte, Tipps und Hintergründe in Langform.</p><span class="treatment__more">Zum Magazin →</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATIENTENPORTAL BAND -->
+  <section class="portal-band">
+    <div class="container portal-band__inner">
+      <div>
+        <h2>Schon in Behandlung bei uns?</h2>
+        <p class="lead">Über das Patientenportal rufen Sie Befunde ab, vereinbaren Termine und kontaktieren den medizinischen Dienst – sicher und jederzeit.</p>
+      </div>
+      <a href={site.patientenportal} class="btn btn--lg portal-band__btn" target="_blank" rel="noopener">🔒 Zum Patientenportal</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--soft">
+    <div class="container faq-wrap">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Häufige Fragen</span>
+        <h2>Gut zu wissen</h2>
+      </div>
+      <div class="faq">
+        {faqs.map((f) => (
+          <details class="faq__item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  /* HERO */
+  .hero { background: linear-gradient(160deg, var(--rose-100) 0%, var(--bg) 55%, var(--blue-100) 100%); padding-block: clamp(2.5rem, 6vw, 5rem); }
+  .hero__inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.5rem; align-items: center; }
+  .hero__actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.6rem 0 1.4rem; }
+  .hero__trust { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; color: var(--ink-700); font-size: 0.95rem; font-weight: 500; }
+  .hero__media { position: relative; min-height: 340px; display: grid; place-items: center; }
+  .hero__blob { width: 320px; height: 320px; border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; background: linear-gradient(150deg, var(--rose-600), var(--blue-500)); opacity: 0.92; box-shadow: var(--shadow-lg); }
+  .hero__card { position: absolute; background: #fff; border-radius: var(--radius); padding: 0.9rem 1.1rem; box-shadow: var(--shadow-md); display: flex; flex-direction: column; }
+  .hero__card strong { color: var(--rose-700); }
+  .hero__card span { font-size: 0.85rem; color: var(--ink-500); }
+  .hero__card--1 { top: 12%; left: -4%; }
+  .hero__card--2 { bottom: 10%; right: -2%; }
+  @media (max-width: 900px) { .hero__inner { grid-template-columns: 1fr; } .hero__media { display: none; } }
+
+  /* Behandlungs-Karten */
+  .treatment { display: flex; flex-direction: column; }
+  .treatment__tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-700); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+  .treatment__neu { font-style: normal; background: var(--rose-600); color: #fff; padding: 0.05rem 0.45rem; border-radius: var(--radius-pill); font-size: 0.65rem; }
+  .treatment h3 { font-size: 1.18rem; }
+  .treatment p { font-size: 0.94rem; color: var(--ink-500); flex-grow: 1; }
+  .treatment__more { color: var(--rose-700); font-weight: 600; font-size: 0.9rem; }
+
+  /* Steps */
+  .steps { counter-reset: step; }
+  .step { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.8rem; position: relative; }
+  .step--highlight { border-color: var(--rose-400); box-shadow: var(--shadow-md); }
+  .step__num { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--rose-100); color: var(--rose-700); font-weight: 700; font-size: 1.2rem; font-family: var(--font-display); margin-bottom: 1rem; }
+  .step--highlight .step__num { background: var(--rose-600); color: #fff; }
+  .step__link { color: var(--rose-700); font-weight: 600; font-size: 0.92rem; }
+
+  /* Split sections */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+  .split--reverse .split__media { order: -1; }
+  .split__text .btn { margin-right: 0.6rem; margin-top: 0.4rem; }
+  .split__media { min-height: 300px; border-radius: var(--radius-lg); display: grid; place-items: center; color: #fff; font-family: var(--font-display); font-size: 1.6rem; box-shadow: var(--shadow-md); }
+  .split__media--rose { background: linear-gradient(150deg, var(--rose-700), var(--rose-500)); }
+  .split__media--blue { background: linear-gradient(150deg, var(--blue-700), var(--blue-500)); }
+  @media (max-width: 820px) { .split { grid-template-columns: 1fr; } .split--reverse .split__media { order: 0; } }
+
+  /* Portal band */
+  .portal-band { background: var(--blue-700); color: #fff; }
+  .portal-band__inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-block: 2.8rem; flex-wrap: wrap; }
+  .portal-band h2 { color: #fff; }
+  .portal-band .lead { color: rgba(255,255,255,0.85); margin: 0; max-width: 620px; }
+  .portal-band__btn { background: #fff; color: var(--blue-700); }
+  .portal-band__btn:hover { background: var(--blue-100); }
+
+  /* FAQ */
+  .faq-wrap { max-width: 820px; }
+  .faq__item { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.3rem; margin-bottom: 0.8rem; }
+  .faq__item summary { font-weight: 600; cursor: pointer; font-size: 1.05rem; list-style: none; }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::after { content: '+'; float: right; color: var(--rose-600); font-size: 1.3rem; line-height: 1; }
+  .faq__item[open] summary::after { content: '–'; }
+  .faq__item p { margin: 0.8rem 0 0.2rem; color: var(--ink-700); }
+</style>

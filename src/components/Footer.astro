@@ -1,0 +1,62 @@
+---
+import { site, nav, treatments } from '../data/site.js';
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <img src="/img/logo-placeholder.svg" alt={`${site.brand} – Platzhalter-Logo`} width="220" height="44" class="footer__logo" />
+      <p class="footer__addr">{site.address}</p>
+      <p class="footer__addr"><a href={site.phoneHref}>{site.phone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <a href={site.patientenportal} class="btn btn--ghost" target="_blank" rel="noopener">🔒 Patientenportal</a>
+    </div>
+
+    <div class="footer__col">
+      <h4>Behandlungen</h4>
+      <ul>
+        {treatments.slice(0, 6).map((t) => <li><a href={`/behandlungen/${t.slug}/`}>{t.title}</a></li>)}
+        <li><a href="/behandlungen/">Alle Behandlungen →</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4>Orientierung</h4>
+      <ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+    </div>
+
+    <div class="footer__col">
+      <h4>Termin</h4>
+      <ul>
+        <li><a href={site.bookingErstgespraech} target="_blank" rel="noopener">Erstgespräch vereinbaren</a></li>
+        <li><a href={site.bookingKurzgespraech} target="_blank" rel="noopener">Kurzgespräch (kostenlos)</a></li>
+        <li><a href="/kontakt/">Kontakt</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>© {new Date().getFullYear()} {site.brand} · {site.brandSub} <span class="footer__ph">· Platzhalter-Branding</span></p>
+    <nav class="footer__legal" aria-label="Rechtliches">
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--ink-900); color: #d9d7dc; padding-top: 3.5rem; margin-top: 2rem; }
+  .footer a { color: #d9d7dc; }
+  .footer a:hover { color: #fff; }
+  .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2rem; padding-bottom: 2.5rem; }
+  .footer__logo { background: #fff; padding: 8px 12px; border-radius: 10px; margin-bottom: 1rem; }
+  .footer__addr { font-size: 0.92rem; color: #b3b1b8; margin-bottom: 0.4rem; }
+  .footer__brand .btn { margin-top: 0.8rem; color: #fff; border-color: rgba(255,255,255,0.3); }
+  .footer__brand .btn:hover { background: rgba(255,255,255,0.1); }
+  .footer__col h4 { color: #fff; font-family: var(--font-sans); font-size: 0.95rem; letter-spacing: 0.03em; margin-bottom: 0.9rem; }
+  .footer__col ul { list-style: none; margin: 0; padding: 0; }
+  .footer__col li { margin-bottom: 0.5rem; font-size: 0.92rem; }
+  .footer__bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.12); padding-block: 1.3rem; font-size: 0.85rem; color: #9b99a0; }
+  .footer__ph { color: var(--rose-400); }
+  .footer__legal { display: flex; gap: 1.2rem; }
+  @media (max-width: 860px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .footer__grid { grid-template-columns: 1fr; } }
+</style>

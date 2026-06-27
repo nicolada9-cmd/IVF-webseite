@@ -1,0 +1,135 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site, treatments } from '../../data/site.js';
+import { treatmentContent, fallbackContent } from '../../data/treatment-content.js';
+
+export function getStaticPaths() {
+  return treatments.map((t) => ({ params: { slug: t.slug }, props: { t } }));
+}
+
+const { t } = Astro.props;
+const c = treatmentContent[t.slug] ?? fallbackContent(t.title);
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'MedicalProcedure',
+      name: t.title,
+      description: c.intro,
+      url: `https://www.ivf.at/behandlungen/${t.slug}/`,
+      provider: { '@type': 'MedicalClinic', name: 'Next Fertility IVF Zech Bregenz' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: c.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    },
+  ],
+};
+---
+<Base title={`${t.title} – Next Fertility Bregenz`} description={c.intro.slice(0, 155)} jsonld={jsonld}>
+
+  <section class="t-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Brotkrumen">
+        <a href="/">Start</a> <span>/</span> <a href="/behandlungen/">Behandlungen</a> <span>/</span> <strong>{t.title}</strong>
+      </nav>
+      <span class="eyebrow">{t.tag}</span>
+      <h1>{t.title}</h1>
+      <p class="lead">{c.intro}</p>
+      <div class="t-hero__actions">
+        <a href={site.bookingErstgespraech} class="btn btn--primary" target="_blank" rel="noopener">Erstgespräch vereinbaren</a>
+        <a href={site.bookingKurzgespraech} class="btn btn--secondary" target="_blank" rel="noopener">Kostenloses Kurzgespräch</a>
+      </div>
+      {t.source && <p class="t-hero__src">Inhalte werden u. a. aus <code>{t.source}</code> übernommen und strukturiert.</p>}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container t-grid">
+      <div class="t-main">
+        <h2>Für wen ist diese Behandlung geeignet?</h2>
+        <ul class="ticklist">
+          {c.forWhom.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <h2>Ablauf in Schritten</h2>
+        <ol class="proc">
+          {c.steps.map((s, i) => (
+            <li class="proc__step">
+              <span class="proc__num">{i + 1}</span>
+              <div><strong>{s.title}</strong><p>{s.text}</p></div>
+            </li>
+          ))}
+        </ol>
+
+        <h2>Häufige Fragen</h2>
+        <div class="faq">
+          {c.faqs.map((f) => (
+            <details class="faq__item"><summary>{f.q}</summary><p>{f.a}</p></details>
+          ))}
+        </div>
+      </div>
+
+      <aside class="t-aside">
+        <div class="t-card">
+          <h3>Gut zu wissen</h3>
+          <ul class="ticklist ticklist--sm">{c.facts.map((f) => <li>{f}</li>)}</ul>
+        </div>
+        <div class="t-card t-card--cta">
+          <h3>Nächster Schritt</h3>
+          <p>Unverbindlich starten – wir beraten Sie persönlich.</p>
+          <a href={site.bookingErstgespraech} class="btn btn--primary" target="_blank" rel="noopener">Erstgespräch vereinbaren</a>
+          <a href={site.bookingKurzgespraech} class="btn btn--ghost" target="_blank" rel="noopener">Kurzgespräch (kostenlos)</a>
+        </div>
+        <div class="t-card t-card--portal">
+          <p>Bereits in Behandlung?</p>
+          <a href={site.patientenportal} target="_blank" rel="noopener">🔒 Zum Patientenportal →</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .t-hero { background: linear-gradient(160deg, var(--rose-100), var(--bg) 70%); padding-block: 2.6rem 2.4rem; }
+  .crumbs { font-size: 0.85rem; color: var(--ink-500); margin-bottom: 1.1rem; }
+  .crumbs a:hover { color: var(--rose-700); }
+  .crumbs span { margin: 0 0.3rem; opacity: 0.5; }
+  .t-hero .lead { max-width: 720px; }
+  .t-hero__actions { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 1.2rem; }
+  .t-hero__src { margin-top: 1rem; font-size: 0.85rem; color: var(--ink-500); }
+  .t-hero__src code { background: var(--rose-100); padding: 0.1rem 0.4rem; border-radius: 6px; }
+
+  .t-grid { display: grid; grid-template-columns: 1fr 320px; gap: 2.5rem; align-items: start; }
+  .t-main h2 { margin-top: 2rem; }
+  .t-main h2:first-child { margin-top: 0; }
+
+  .ticklist { list-style: none; padding: 0; margin: 0; }
+  .ticklist li { padding-left: 1.8rem; position: relative; margin-bottom: 0.6rem; }
+  .ticklist li::before { content: '✓'; position: absolute; left: 0; color: var(--rose-600); font-weight: 700; }
+  .ticklist--sm li { font-size: 0.9rem; }
+
+  .proc { list-style: none; padding: 0; margin: 0; }
+  .proc__step { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+  .proc__num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--rose-100); color: var(--rose-700); font-weight: 700; display: grid; place-items: center; font-family: var(--font-display); }
+  .proc__step p { margin: 0.2rem 0 0; color: var(--ink-500); font-size: 0.95rem; }
+
+  .faq__item { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 0.9rem 1.2rem; margin-bottom: 0.7rem; }
+  .faq__item summary { font-weight: 600; cursor: pointer; list-style: none; }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::after { content: '+'; float: right; color: var(--rose-600); }
+  .faq__item[open] summary::after { content: '–'; }
+  .faq__item p { margin: 0.7rem 0 0.2rem; color: var(--ink-700); }
+
+  .t-aside { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 1rem; }
+  .t-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.4rem; box-shadow: var(--shadow-sm); }
+  .t-card h3 { font-size: 1.15rem; }
+  .t-card--cta { background: var(--rose-100); border-color: var(--rose-200); }
+  .t-card--cta .btn { width: 100%; justify-content: center; margin-top: 0.5rem; }
+  .t-card--portal { background: var(--blue-700); color: #fff; }
+  .t-card--portal p { margin: 0 0 0.3rem; font-weight: 600; }
+  .t-card--portal a { color: #fff; font-weight: 600; }
+
+  @media (max-width: 880px) { .t-grid { grid-template-columns: 1fr; } .t-aside { position: static; } }
+</style>
