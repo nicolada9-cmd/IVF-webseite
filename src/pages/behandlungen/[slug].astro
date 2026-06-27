@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { site, treatments } from '../../data/site.js';
 import { treatmentContent, fallbackContent } from '../../data/treatment-content.js';
+import { u } from '../../lib/url.js';
 
 export function getStaticPaths() {
   return treatments.map((t) => ({ params: { slug: t.slug }, props: { t } }));
@@ -32,7 +33,7 @@ const jsonld = {
   <section class="t-hero">
     <div class="container">
       <nav class="crumbs" aria-label="Brotkrumen">
-        <a href="/">Start</a> <span>/</span> <a href="/behandlungen/">Behandlungen</a> <span>/</span> <strong>{t.title}</strong>
+        <a href={u('/')}>Start</a> <span>/</span> <a href={u('/behandlungen/')}>Behandlungen</a> <span>/</span> <strong>{t.title}</strong>
       </nav>
       <span class="eyebrow">{t.tag}</span>
       <h1>{t.title}</h1>

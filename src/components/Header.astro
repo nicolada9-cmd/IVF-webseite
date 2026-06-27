@@ -1,5 +1,6 @@
 ---
 import { site, nav } from '../data/site.js';
+import { u } from '../lib/url.js';
 ---
 <header class="site-header">
   <div class="topbar">
@@ -14,13 +15,13 @@ import { site, nav } from '../data/site.js';
   </div>
 
   <div class="container nav">
-    <a href="/" class="nav__logo" aria-label={`${site.brand} Startseite`}>
-      <img src="/img/logo-placeholder.svg" alt={`${site.brand} – Platzhalter-Logo`} width="220" height="44" />
+    <a href={u('/')} class="nav__logo" aria-label={`${site.brand} Startseite`}>
+      <img src={u('/img/logo-placeholder.svg')} alt={`${site.brand} – Platzhalter-Logo`} width="220" height="44" />
     </a>
 
     <nav class="nav__menu" aria-label="Hauptnavigation">
       {nav.map((item) => (
-        <a href={item.href} class="nav__link">{item.label}</a>
+        <a href={u(item.href)} class="nav__link">{item.label}</a>
       ))}
     </nav>
 
@@ -35,7 +36,7 @@ import { site, nav } from '../data/site.js';
   </div>
 
   <div class="mobile-menu" id="mobileMenu" hidden>
-    {nav.map((item) => <a href={item.href} class="mobile-menu__link">{item.label}</a>)}
+    {nav.map((item) => <a href={u(item.href)} class="mobile-menu__link">{item.label}</a>)}
     <a href={site.patientenportal} class="mobile-menu__link" target="_blank" rel="noopener">🔒 Patientenportal</a>
     <div class="mobile-menu__actions">
       <a href={site.bookingKurzgespraech} class="btn btn--secondary" target="_blank" rel="noopener">Kurzgespräch</a>

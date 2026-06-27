@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { site, treatments } from '../../data/site.js';
+import { u } from '../../lib/url.js';
 ---
 <Base title="Behandlungen – Next Fertility Bregenz" description="Alle Kinderwunschbehandlungen auf einen Blick: IVF, ICSI, Eizellspende, Eizellvorsorge, Andrologie, Hysteroskopie, Genetik und mehr.">
   <section class="section">
@@ -12,7 +13,7 @@ import { site, treatments } from '../../data/site.js';
       </div>
       <div class="grid grid-3">
         {treatments.map((t) => (
-          <a href={`/behandlungen/${t.slug}/`} class="card treatment">
+          <a href={u(`/behandlungen/${t.slug}/`)} class="card treatment">
             <span class="treatment__tag">{t.tag}{t.neu && <em class="treatment__neu">neu</em>}</span>
             <h3>{t.title}</h3>
             <p>{t.teaser}</p>

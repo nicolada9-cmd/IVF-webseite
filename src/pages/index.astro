@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site, treatments } from '../data/site.js';
+import { u } from '../lib/url.js';
 
 const faqs = [
   { q: 'Was ist ein Kurzgespräch?', a: 'Ein kostenloses, unverbindliches Kurzgespräch, in dem wir Ihre Situation kennenlernen und die nächsten Schritte besprechen – die niederschwellige Möglichkeit, uns kennenzulernen, bevor Sie ein Erstgespräch vereinbaren.' },
@@ -40,9 +41,11 @@ const jsonld = {
           <li>✓ Persönliche Begleitung</li>
         </ul>
       </div>
-      <div class="hero__media" aria-hidden="true">
+      <div class="hero__media">
+        <div class="hero__frame">
+          <img src={u('/img/hero.jpg')} alt="Schwangere Frau hält ihren Babybauch" width="1376" height="768" fetchpriority="high" />
+        </div>
         <div class="hero__card hero__card--1"><strong>Kurzgespräch</strong><span>kostenlos &amp; unverbindlich</span></div>
-        <div class="hero__blob"></div>
         <div class="hero__card hero__card--2"><strong>Patientenportal</strong><span>Befunde &amp; Termine online</span></div>
       </div>
     </div>
@@ -58,7 +61,7 @@ const jsonld = {
       </div>
       <div class="grid grid-4">
         {treatments.map((t) => (
-          <a href={`/behandlungen/${t.slug}/`} class="card treatment">
+          <a href={u(`/behandlungen/${t.slug}/`)} class="card treatment">
             <span class="treatment__tag">{t.tag}{t.neu && <em class="treatment__neu">neu</em>}</span>
             <h3>{t.title}</h3>
             <p>{t.teaser}</p>
@@ -93,7 +96,7 @@ const jsonld = {
           <span class="step__num">3</span>
           <h3>Behandlung</h3>
           <p>Ihr individueller Behandlungsplan – persönlich begleitet, mit Befunden &amp; Terminen im Portal.</p>
-          <a href="/ablauf/" class="step__link">Ablauf im Detail →</a>
+          <a href={u('/ablauf/')} class="step__link">Ablauf im Detail →</a>
         </div>
       </div>
     </div>
@@ -108,7 +111,7 @@ const jsonld = {
         <h2>Fruchtbarkeit &amp; Du</h2>
         <p class="lead">Wissen schafft Sicherheit. In unseren regelmäßigen Webinaren teilen unsere Expert:innen verständlich, was bei Kinderwunsch wirklich zählt – vorwärtsgewandt und auf dem aktuellen Stand der Medizin.</p>
         <a href={site.webinarZoom} class="btn btn--primary" target="_blank" rel="noopener">Zum nächsten Webinar anmelden</a>
-        <a href="/akademie/" class="btn btn--ghost">Alle Themen &amp; Aufzeichnungen</a>
+        <a href={u('/akademie/')} class="btn btn--ghost">Alle Themen &amp; Aufzeichnungen</a>
       </div>
     </div>
   </section>
@@ -120,7 +123,7 @@ const jsonld = {
         <span class="eyebrow">Für Zuweiser:innen</span>
         <h2>Partnerschaft auf Augenhöhe.</h2>
         <p class="lead">Sie betreuen Patient:innen mit Kinderwunsch? Wir bieten klare Überweisungswege, schnelle Rückmeldung und fachlichen Austausch – Ihre Patient:innen bleiben in besten Händen.</p>
-        <a href="/zuweiser/" class="btn btn--primary">Informationen für Zuweiser:innen</a>
+        <a href={u('/zuweiser/')} class="btn btn--primary">Informationen für Zuweiser:innen</a>
       </div>
       <div class="split__media split__media--blue" aria-hidden="true"><span>Zuweiser:innen</span></div>
     </div>
@@ -135,9 +138,9 @@ const jsonld = {
         <p class="lead">Medizinische Informationen zum schnellen Nachlesen – plus unser Magazin mit Geschichten und Hintergründen rund um den Kinderwunsch.</p>
       </div>
       <div class="grid grid-3">
-        <a href="/behandlungen/genetik-pid/" class="card"><h3>Genetik verständlich</h3><p>Was PID und genetische Diagnostik für Ihre Behandlung bedeuten.</p><span class="treatment__more">Mehr erfahren →</span></a>
-        <a href="/behandlungen/eizellspende/" class="card"><h3>Eizellspende von A–Z</h3><p>Ablauf, Voraussetzungen und rechtlicher Rahmen – kompakt erklärt.</p><span class="treatment__more">Mehr erfahren →</span></a>
-        <a href="/wissen/" class="card"><h3>Kinderwunsch-Magazin</h3><p>Erfahrungsberichte, Tipps und Hintergründe in Langform.</p><span class="treatment__more">Zum Magazin →</span></a>
+        <a href={u('/behandlungen/genetik-pid/')} class="card"><h3>Genetik verständlich</h3><p>Was PID und genetische Diagnostik für Ihre Behandlung bedeuten.</p><span class="treatment__more">Mehr erfahren →</span></a>
+        <a href={u('/behandlungen/eizellspende/')} class="card"><h3>Eizellspende von A–Z</h3><p>Ablauf, Voraussetzungen und rechtlicher Rahmen – kompakt erklärt.</p><span class="treatment__more">Mehr erfahren →</span></a>
+        <a href={u('/wissen/')} class="card"><h3>Kinderwunsch-Magazin</h3><p>Erfahrungsberichte, Tipps und Hintergründe in Langform.</p><span class="treatment__more">Zum Magazin →</span></a>
       </div>
     </div>
   </section>
@@ -180,7 +183,8 @@ const jsonld = {
   .hero__actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.6rem 0 1.4rem; }
   .hero__trust { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; color: var(--ink-700); font-size: 0.95rem; font-weight: 500; }
   .hero__media { position: relative; min-height: 340px; display: grid; place-items: center; }
-  .hero__blob { width: 320px; height: 320px; border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; background: linear-gradient(150deg, var(--rose-600), var(--blue-500)); opacity: 0.92; box-shadow: var(--shadow-lg); }
+  .hero__frame { width: 100%; max-width: 440px; aspect-ratio: 4 / 4.4; border-radius: 52% 48% 48% 52% / 40% 40% 60% 60%; overflow: hidden; box-shadow: var(--shadow-lg); }
+  .hero__frame img { width: 100%; height: 100%; object-fit: cover; }
   .hero__card { position: absolute; background: #fff; border-radius: var(--radius); padding: 0.9rem 1.1rem; box-shadow: var(--shadow-md); display: flex; flex-direction: column; }
   .hero__card strong { color: var(--rose-700); }
   .hero__card span { font-size: 0.85rem; color: var(--ink-500); }
