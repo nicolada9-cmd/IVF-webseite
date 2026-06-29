@@ -9,7 +9,15 @@ const {
   title = 'Next Fertility – Kinderwunschklinik Bregenz',
   description = 'Kinderwunschbehandlung in Bregenz: IVF, ICSI, Eizellspende, Eizellvorsorge und mehr. Persönlich begleitet – vom kostenlosen Kurzgespräch bis zur Behandlung.',
   jsonld = null,
+  heroOverlay = false, // true = transparenter Header über Vollbild-Hero (Startseite)
 } = Astro.props;
+
+// Markenschrift Rotunda – selbst gehostet, base-aware eingebunden.
+const rotundaFaces = `
+@font-face{font-family:'Rotunda';src:url('${u('/fonts/rotunda/Rotunda-Light.woff2')}') format('woff2');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Rotunda';src:url('${u('/fonts/rotunda/Rotunda-Regular.woff2')}') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Rotunda';src:url('${u('/fonts/rotunda/Rotunda-Medium.woff2')}') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+`;
 ---
 <!doctype html>
 <html lang="de">
@@ -19,18 +27,21 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href={u('/img/logo-placeholder.svg')} />
-    <!-- Schriften: Hanken Grotesk (Text/Headlines) + Fraunces-Kursiv (nur Akzentwörter) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet" />
+    <!-- Markenschrift Rotunda (selbst gehostet) -->
+    <link rel="preload" href={u('/fonts/rotunda/Rotunda-Regular.woff2')} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={u('/fonts/rotunda/Rotunda-Medium.woff2')} as="font" type="font/woff2" crossorigin />
+    <style set:html={rotundaFaces}></style>
     {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
   </head>
   <body>
     <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
-    <Header />
-    <main id="main">
+    <Header heroOverlay={heroOverlay} />
+    <main id="main" class={heroOverlay ? '' : 'main--offset'}>
       <slot />
     </main>
     <Footer />
+    <style is:global>
+      .main--offset { padding-top: var(--header-h); }
+    </style>
   </body>
 </html>

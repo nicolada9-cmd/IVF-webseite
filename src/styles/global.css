@@ -1,49 +1,52 @@
 /* =============================================================
-   Next Fertility – Designsystem (verfeinert)
-   Richtung: fein, feminin, ruhig, ästhetisch – viel Weißraum,
-   leichte Schriftgewichte, gedämpfte Töne. Display-Serif NUR als
-   kursiver Akzent auf einem Schlüsselwort (wie bei Fertty).
+   Next Fertility – Designsystem v2
+   (Layout-Prinzip an Fertty orientiert, aber EIGENE CI)
+   - Schrift: Rotunda (Markenschrift Next Fertility), Schnitte 300/400/500
+   - Überschriften: Rotunda Medium (500), KEIN Kursiv
+   - Palette: Fast-Schwarz + Weiß + warmes Creme; Rosé als einziger Akzent
+   - Großbuchstaben-Menü, feine Rahmen, ruhige Schatten, viel Weißraum
    ============================================================= */
 
 :root {
-  /* --- Tinten / Neutrale (warm, leicht aubergine) ----------- */
-  --ink:        #2c2630; /* Haupttext, warm-dunkel */
-  --ink-soft:   #4a4350;
-  --muted:      #8d8593; /* sekundärer Text */
-  --line:       #ece7ea; /* sehr feine Trennlinien */
-  --line-strong:#ddd5da;
+  /* --- Neutrale --------------------------------------------- */
+  --ink:        #241f24; /* Fast-Schwarz, warm */
+  --ink-soft:   #4c454c;
+  --muted:      #8a828a;
+  --line:       #e9e3e6;
+  --line-strong:#d9d1d6;
 
-  /* --- Rosé (Akzent, sparsam & fein eingesetzt) ------------- */
-  --rose:       #a8466f; /* Akzentfarbe – Wörter, Links, Details */
-  --rose-deep:  #7c2f51; /* Hover / Tiefe */
-  --rose-soft:  #c98fa9; /* zarte Variante */
-  --blush:      #f6eef0; /* zarter Flächenton (Panels) */
-  --blush-2:    #f1e4e8; /* etwas kräftigerer Blush */
+  /* --- Akzent (Rosé) – sparsam ------------------------------ */
+  --rose:       #a8406b;
+  --rose-deep:  #7d2b4d;
+  --rose-soft:  #cf9bb2;
+  --blush:      #f7eef1;
 
-  /* --- Dusty Blue (sehr sparsamer Zweitakzent) ------------- */
-  --slate:      #6f8395;
-  --slate-soft: #eef1f3;
+  /* --- Warmes Creme (zweiter Neutralton, Fertty-Taupe) ------ */
+  --cream:      #f6f1ea;
+  --cream-2:    #efe6da;
+  --sand:       #c7b49f;
 
   /* --- Hintergründe ---------------------------------------- */
   --bg:         #ffffff;
-  --bg-soft:    #fbf8f6; /* warmes Off-White */
+  --bg-soft:    #faf7f3;
 
-  /* --- Rollen ---------------------------------------------- */
   --accent:     var(--rose);
 
-  /* --- Typografie ------------------------------------------ */
-  --font-sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-accent: "Fraunces", Georgia, serif; /* nur kursive Akzentwörter */
+  /* --- Typografie (Markenschrift: Rotunda) ----------------- */
+  --font-sans:    "Rotunda", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-display: "Rotunda", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* --- Maße ------------------------------------------------ */
-  --radius:    10px;
-  --radius-lg: 16px;
+  --radius:    8px;
+  --radius-lg: 12px;
   --radius-pill: 999px;
-  --shadow-sm: 0 1px 2px rgba(44, 38, 48, 0.04);
-  --shadow-md: 0 10px 40px rgba(124, 47, 81, 0.07);
-  --shadow-lg: 0 24px 60px rgba(124, 47, 81, 0.10);
-  --container: 1180px;
-  --space-section: clamp(4rem, 8vw, 7.5rem);
+  --shadow-sm: 0 1px 2px rgba(36, 31, 36, 0.05);
+  --shadow-md: 0 16px 44px rgba(36, 31, 36, 0.09);
+  --shadow-lg: 0 30px 70px rgba(36, 31, 36, 0.13);
+  --container: 1240px;
+  --container-narrow: 920px;
+  --header-h: 78px;
+  --space-section: clamp(4.5rem, 9vw, 8.5rem);
 }
 
 /* --- Reset / Basis ----------------------------------------- */
@@ -54,7 +57,7 @@ body {
   font-family: var(--font-sans);
   color: var(--ink);
   background: var(--bg);
-  line-height: 1.72;
+  line-height: 1.7;
   font-size: 17px;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -63,78 +66,85 @@ body {
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
-/* Überschriften: leichte Sans, viel Luft, enge Laufweite ---- */
-h1, h2, h3, h4 { margin: 0 0 0.5em; color: var(--ink); }
-h1, h2 {
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.022em;
-}
-h1 { font-size: clamp(2.4rem, 5vw, 3.7rem); }
-h2 { font-size: clamp(1.75rem, 3.2vw, 2.55rem); }
-h3 { font-size: 1.16rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; }
-h4 { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.01em; }
+/* Überschriften: Serife, fett, eng – stehen als Statement ---- */
+h1, h2, h3, h4 { margin: 0 0 0.5em; color: var(--ink); font-family: var(--font-display); }
+h1, h2 { font-weight: 500; line-height: 1.12; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.9rem, 3.4vw, 2.9rem); }
+h3 { font-size: 1.3rem; font-weight: 500; line-height: 1.25; }
+h4 { font-size: 0.98rem; font-weight: 500; font-family: var(--font-sans); }
 
-/* Kursiver, farbiger Akzent auf einem Schlüsselwort ---------- */
-h1 em, h2 em, .accent {
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-weight: 400;
+/* Akzent auf einem Schlüsselwort: Farbe statt Kursiv -------- */
+h1 em, h2 em, h3 em, .accent {
+  font-style: normal;
+  font-family: inherit;
   color: var(--accent);
+  font-weight: 500;
 }
 
 p { margin: 0 0 1rem; }
-.lead { font-size: 1.18rem; line-height: 1.65; color: var(--ink-soft); font-weight: 400; }
+.lead { font-size: 1.18rem; line-height: 1.62; color: var(--ink-soft); font-weight: 400; }
 
 /* --- Layout-Helfer ----------------------------------------- */
-.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: 1.5rem; }
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: 1.6rem; }
+.container--narrow { max-width: var(--container-narrow); }
 .section { padding-block: var(--space-section); }
 .section--soft { background: var(--bg-soft); }
+.section--cream { background: var(--cream); }
 .section--blush { background: var(--blush); }
+.section--ink { background: var(--ink); color: #e7e1e5; }
+.section--ink h1, .section--ink h2, .section--ink h3 { color: #fff; }
+
 .eyebrow {
   display: inline-block;
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--rose);
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.2rem;
 }
-.section-head { max-width: 680px; margin-bottom: 3rem; }
+.section-head { max-width: 720px; margin-bottom: 3.2rem; }
 .section-head--center { margin-inline: auto; text-align: center; }
 .section-head .lead { margin-bottom: 0; }
 
-/* --- Buttons (feiner) -------------------------------------- */
+/* --- Buttons ----------------------------------------------- */
 .btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-family: var(--font-sans); font-weight: 500; font-size: 0.97rem;
-  padding: 0.72rem 1.4rem; border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-family: var(--font-sans); font-weight: 500; font-size: 0.82rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.92rem 1.7rem; border-radius: var(--radius-pill);
   border: 1px solid transparent; cursor: pointer; white-space: nowrap;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 .btn--primary { background: var(--rose); color: #fff; }
 .btn--primary:hover { background: var(--rose-deep); }
-.btn--secondary { background: transparent; color: var(--rose); border-color: var(--line-strong); }
-.btn--secondary:hover { border-color: var(--rose-soft); color: var(--rose-deep); }
-.btn--ghost { background: transparent; color: var(--ink-soft); border-color: var(--line-strong); }
-.btn--ghost:hover { border-color: var(--rose-soft); color: var(--rose); }
-.btn--lg { padding: 0.85rem 1.7rem; font-size: 1.02rem; }
-.btn--text { padding: 0; border: 0; color: var(--rose); font-weight: 600; }
+.btn--secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn--secondary:hover { border-color: var(--ink); }
+.btn--light { background: #fff; color: var(--ink); }
+.btn--light:hover { background: var(--blush); color: var(--rose-deep); }
+.btn--outline-light { background: transparent; color: #fff; border-color: rgba(255,255,255,0.55); }
+.btn--outline-light:hover { background: #fff; color: var(--ink); }
+.btn--lg { padding: 1.05rem 2rem; font-size: 0.86rem; }
+.btn--text {
+  padding: 0; border: 0; background: none; text-transform: uppercase;
+  letter-spacing: 0.1em; font-size: 0.78rem; font-weight: 500; color: var(--rose);
+}
 .btn--text:hover { color: var(--rose-deep); }
 
-/* --- Karten (feine Linien, dezente Schatten) --------------- */
+/* --- Karten (feine Linien, kaum Rundung) ------------------- */
 .card {
   background: var(--bg); border: 1px solid var(--line);
-  border-radius: var(--radius-lg); padding: 1.7rem;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  border-radius: var(--radius-lg); padding: 1.9rem;
+  transition: border-color 0.25s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
-.card:hover { border-color: var(--line-strong); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.card:hover { border-color: transparent; box-shadow: var(--shadow-md); transform: translateY(-3px); }
 
-/* --- Linien-Icons (dünn, einfarbig) ------------------------ */
-.icon { width: 1.05em; height: 1.05em; stroke: currentColor; stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: -0.15em; }
+/* --- Linien-Icons ------------------------------------------ */
+.icon { width: 1.05em; height: 1.05em; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: -0.15em; }
 
 /* --- Utilities --------------------------------------------- */
-.grid { display: grid; gap: 1.5rem; }
+.grid { display: grid; gap: 1.6rem; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }

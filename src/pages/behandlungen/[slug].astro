@@ -82,7 +82,7 @@ const jsonld = {
           <h3>Nächster Schritt</h3>
           <p>Unverbindlich starten – wir beraten Sie persönlich.</p>
           <a href={site.bookingErstgespraech} class="btn btn--primary" target="_blank" rel="noopener">Erstgespräch vereinbaren</a>
-          <a href={site.bookingKurzgespraech} class="btn btn--ghost" target="_blank" rel="noopener">Kurzgespräch (kostenlos)</a>
+          <a href={site.bookingKurzgespraech} class="btn btn--secondary" target="_blank" rel="noopener">Kurzgespräch (kostenlos)</a>
         </div>
         <div class="t-card t-card--portal">
           <span class="t-card__plabel">Bereits in Behandlung?</span>
@@ -116,8 +116,8 @@ const jsonld = {
 
   .proc { list-style: none; padding: 0; margin: 0; }
   .proc__step { display: flex; gap: 1.2rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
-  .proc__num { flex-shrink: 0; font-family: var(--font-accent); font-style: italic; font-size: 1.4rem; color: var(--rose-soft); line-height: 1.2; }
-  .proc__step strong { font-weight: 600; }
+  .proc__num { flex-shrink: 0; font-size: 1.25rem; font-weight: 500; color: var(--rose-soft); line-height: 1.3; letter-spacing: 0.04em; }
+  .proc__step strong { font-weight: 500; }
   .proc__step p { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.95rem; }
 
   .faq__item { border-bottom: 1px solid var(--line-strong); padding: 1.05rem 0.1rem; }
@@ -134,8 +134,8 @@ const jsonld = {
   .t-card--cta p { color: var(--ink-soft); font-size: 0.95rem; }
   .t-card--cta .btn { width: 100%; justify-content: center; margin-top: 0.55rem; }
   .t-card--portal { display: flex; flex-direction: column; gap: 0.4rem; }
-  .t-card__plabel { font-weight: 600; font-size: 0.95rem; }
-  .t-card__plink { color: var(--rose); font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.95rem; }
+  .t-card__plabel { font-weight: 500; font-size: 0.95rem; }
+  .t-card__plink { color: var(--rose); font-weight: 500; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.95rem; }
   .t-card__plink:hover { color: var(--rose-deep); }
 
   @media (max-width: 880px) { .t-grid { grid-template-columns: 1fr; gap: 2.5rem; } .t-aside { position: static; } }
