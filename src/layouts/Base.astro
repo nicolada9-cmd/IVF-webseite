@@ -28,8 +28,8 @@ const rotundaFaces = `
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href={u('/img/logo-placeholder.svg')} />
     <!-- Markenschrift Rotunda (selbst gehostet) -->
+    <link rel="preload" href={u('/fonts/rotunda/Rotunda-Light.woff2')} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={u('/fonts/rotunda/Rotunda-Regular.woff2')} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={u('/fonts/rotunda/Rotunda-Medium.woff2')} as="font" type="font/woff2" crossorigin />
     <style set:html={rotundaFaces}></style>
     <!-- Akzentschrift Fraunces (nur für hervorgehobene Wörter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
