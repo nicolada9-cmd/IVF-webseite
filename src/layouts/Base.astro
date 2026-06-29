@@ -31,6 +31,10 @@ const rotundaFaces = `
     <link rel="preload" href={u('/fonts/rotunda/Rotunda-Regular.woff2')} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={u('/fonts/rotunda/Rotunda-Medium.woff2')} as="font" type="font/woff2" crossorigin />
     <style set:html={rotundaFaces}></style>
+    <!-- Akzentschrift Fraunces (nur für hervorgehobene Wörter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet" />
     {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
   </head>
   <body>

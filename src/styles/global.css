@@ -32,9 +32,12 @@
 
   --accent:     var(--rose);
 
-  /* --- Typografie (Markenschrift: Rotunda) ----------------- */
+  /* --- Typografie ------------------------------------------ */
+  /* Rotunda = Markenschrift (Fließtext + Überschriften)        */
+  /* Fraunces = Akzentschrift, NUR für hervorgehobene Wörter    */
   --font-sans:    "Rotunda", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --font-display: "Rotunda", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-accent:  "Fraunces", Georgia, "Times New Roman", serif;
 
   /* --- Maße ------------------------------------------------ */
   --radius:    8px;
@@ -66,24 +69,24 @@ body {
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
-/* Überschriften: Serife, fett, eng – stehen als Statement ---- */
+/* Überschriften: Rotunda, feiner (Regular), eng gesetzt ------ */
 h1, h2, h3, h4 { margin: 0 0 0.5em; color: var(--ink); font-family: var(--font-display); }
-h1, h2 { font-weight: 500; line-height: 1.12; letter-spacing: -0.01em; }
-h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-h2 { font-size: clamp(1.9rem, 3.4vw, 2.9rem); }
-h3 { font-size: 1.3rem; font-weight: 500; line-height: 1.25; }
+h1, h2 { font-weight: 400; line-height: 1.14; letter-spacing: -0.012em; }
+h1 { font-size: clamp(2.4rem, 4.8vw, 3.8rem); }
+h2 { font-size: clamp(1.8rem, 3.2vw, 2.7rem); }
+h3 { font-size: 1.25rem; font-weight: 500; line-height: 1.3; letter-spacing: -0.005em; }
 h4 { font-size: 0.98rem; font-weight: 500; font-family: var(--font-sans); }
 
-/* Akzent auf einem Schlüsselwort: Farbe statt Kursiv -------- */
+/* Akzent: warme Serifen-Akzentschrift (Fraunces), kein Kursiv */
 h1 em, h2 em, h3 em, .accent {
   font-style: normal;
-  font-family: inherit;
+  font-family: var(--font-accent);
   color: var(--accent);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 p { margin: 0 0 1rem; }
-.lead { font-size: 1.18rem; line-height: 1.62; color: var(--ink-soft); font-weight: 400; }
+.lead { font-size: 1.16rem; line-height: 1.64; color: var(--ink-soft); font-weight: 400; }
 
 /* --- Layout-Helfer ----------------------------------------- */
 .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: 1.6rem; }
