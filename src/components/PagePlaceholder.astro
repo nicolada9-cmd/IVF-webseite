@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site.js';
+import Icon from './Icon.astro';
 const { eyebrow, title, lead, points = [] } = Astro.props;
 ---
 <section class="ph-hero">
@@ -12,7 +13,7 @@ const { eyebrow, title, lead, points = [] } = Astro.props;
 <section class="section">
   <div class="container ph-body">
     {points.length > 0 && (
-      <ul class="ph-points">{points.map((p) => <li>{p}</li>)}</ul>
+      <ul class="ph-points">{points.map((p) => <li><Icon name="check" /> <span>{p}</span></li>)}</ul>
     )}
     <div class="ph-note">
       <strong>In Aufbau.</strong> Diese Seite wird im nächsten Schritt mit den extrahierten,
@@ -26,12 +27,12 @@ const { eyebrow, title, lead, points = [] } = Astro.props;
 </section>
 
 <style>
-  .ph-hero { background: linear-gradient(160deg, var(--rose-100), var(--bg) 70%); padding-block: 2.8rem; }
+  .ph-hero { background: linear-gradient(180deg, var(--blush), var(--bg) 80%); padding-block: 3rem; }
   .ph-hero .lead { max-width: 720px; }
   .ph-body { max-width: 820px; }
   .ph-points { list-style: none; padding: 0; margin: 0 0 2rem; }
-  .ph-points li { padding-left: 1.8rem; position: relative; margin-bottom: 0.7rem; font-size: 1.05rem; }
-  .ph-points li::before { content: '→'; position: absolute; left: 0; color: var(--rose-600); font-weight: 700; }
-  .ph-note { background: var(--blue-100); border-left: 4px solid var(--blue-500); border-radius: 10px; padding: 1rem 1.3rem; margin-bottom: 2rem; }
+  .ph-points li { display: flex; gap: 0.7rem; align-items: flex-start; margin-bottom: 0.7rem; font-size: 1.02rem; color: var(--ink-soft); }
+  .ph-points li .icon { color: var(--rose); margin-top: 0.34em; flex-shrink: 0; }
+  .ph-note { background: var(--bg-soft); border-left: 3px solid var(--rose-soft); border-radius: 10px; padding: 1rem 1.3rem; margin-bottom: 2rem; color: var(--ink-soft); }
   .ph-cta { display: flex; gap: 0.7rem; flex-wrap: wrap; }
 </style>
