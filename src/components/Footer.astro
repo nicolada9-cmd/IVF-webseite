@@ -7,8 +7,11 @@ import Icon from './Icon.astro';
   <div class="container footer__grid">
     <div class="footer__brand">
       <div class="footer__logo">
-        <span class="footer__logoName">Next Fertility</span>
-        <span class="footer__logoSub">IVF Zech · Bregenz</span>
+        <img src={u('/img/logo-mark.svg')} alt="" class="footer__mark" width="46" height="38" />
+        <span class="footer__logoText">
+          <span class="footer__logoName">Next Fertility</span>
+          <span class="footer__logoSub">IVF Zech · Bregenz</span>
+        </span>
       </div>
       <p class="footer__addr"><Icon name="pin" /> {site.address}</p>
       <p class="footer__addr"><a href={site.phoneHref}><Icon name="phone" /> {site.phone}</a></p>
@@ -53,7 +56,9 @@ import Icon from './Icon.astro';
   .footer a { color: #c6bfca; transition: color 0.2s ease; }
   .footer a:hover { color: #fff; }
   .footer__grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 3rem; }
-  .footer__logo { display: flex; flex-direction: column; line-height: 1.05; margin-bottom: 1.3rem; }
+  .footer__logo { display: flex; flex-direction: row; align-items: center; gap: 0.6rem; margin-bottom: 1.3rem; }
+  .footer__mark { height: 38px; width: auto; flex-shrink: 0; }
+  .footer__logoText { display: flex; flex-direction: column; line-height: 1.05; }
   .footer__logoName { font-size: 1.4rem; font-weight: 500; color: #fff; }
   .footer__logoSub { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose-soft); margin-top: 3px; }
   .footer__addr { font-size: 0.9rem; color: #a79fad; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.45rem; }

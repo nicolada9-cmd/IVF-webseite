@@ -7,8 +7,11 @@ const { heroOverlay = false } = Astro.props;
 <header class:list={['site-header', { 'header--overlay': heroOverlay }]} id="siteHeader">
   <div class="container nav">
     <a href={u('/')} class="logo" aria-label={`${site.brand} Startseite`}>
-      <span class="logo__name">Next Fertility</span>
-      <span class="logo__sub">IVF Zech · Bregenz</span>
+      <img src={u('/img/logo-mark.svg')} alt="" class="logo__mark" width="46" height="38" />
+      <span class="logo__text">
+        <span class="logo__name">Next Fertility</span>
+        <span class="logo__sub">IVF Zech · Bregenz</span>
+      </span>
     </a>
 
     <nav class="nav__menu" aria-label="Hauptnavigation">
@@ -42,15 +45,17 @@ const { heroOverlay = false } = Astro.props;
     border-bottom: 1px solid var(--line);
     transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
   }
-  .nav { display: flex; align-items: center; gap: 2rem; width: 100%; }
+  .nav { display: flex; align-items: center; gap: 1.5rem; width: 100%; }
 
-  /* Logo als Wortzeichen (Platzhalter) */
-  .logo { display: flex; flex-direction: column; line-height: 1.05; }
-  .logo__name { font-family: var(--font-display); font-size: 1.45rem; font-weight: 500; color: var(--ink); }
-  .logo__sub { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  /* Logo: Bildmarke + Wortzeichen (Platzhalter) */
+  .logo { display: flex; flex-direction: row; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+  .logo__mark { height: 38px; width: auto; flex-shrink: 0; }
+  .logo__text { display: flex; flex-direction: column; line-height: 1.05; white-space: nowrap; }
+  .logo__name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
+  .logo__sub { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 2px; white-space: nowrap; }
 
   /* Menü – Großbuchstaben, gesperrt */
-  .nav__menu { display: flex; gap: 1.9rem; margin-left: auto; }
+  .nav__menu { display: flex; gap: 1.5rem; margin-left: auto; }
   .nav__link {
     font-size: 0.76rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase;
     color: var(--ink-soft); position: relative; padding: 0.4rem 0; white-space: nowrap;
@@ -59,8 +64,7 @@ const { heroOverlay = false } = Astro.props;
   .nav__link:hover { color: var(--rose); }
   .nav__link:hover::after { width: 100%; }
 
-  .nav__actions { display: flex; align-items: center; gap: 1.3rem; margin-left: 0; }
-  .nav__menu + .nav__actions { margin-left: 0; }
+  .nav__actions { display: flex; align-items: center; gap: 1.3rem; margin-left: 1.5rem; }
   .nav__portal { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
   .nav__portal:hover { color: var(--rose); }
   .nav__portal .icon { color: var(--rose); }
