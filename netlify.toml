@@ -1,0 +1,10 @@
+# Netlify-Konfiguration für die Vorschau unter eigenem Namen
+# (z. B. https://ivf-bregenz-draft.netlify.app – Root-Domain, kein Unterpfad).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  SITE_BASE = "/"
+  SITE_URL = "https://ivf-bregenz-draft.netlify.app"

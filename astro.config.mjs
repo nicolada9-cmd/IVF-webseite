@@ -1,10 +1,14 @@
 import { defineConfig } from 'astro/config';
 
-// Vorschau läuft auf GitHub Pages unter dem Unterpfad /IVF-webseite/.
-// Für die finale Live-Domain (ivf.at) später: site auf 'https://www.ivf.at'
-// setzen und base auf '/' (oder die base-Zeile entfernen).
+// Base-Pfad ist umgebungsabhängig:
+//  - GitHub Pages (Projekt-Repo): Unterpfad "/IVF-webseite" (Standard)
+//  - Netlify / eigene Domain (Root): SITE_BASE="/" setzen
+//  - Finale Live-Domain (ivf.at): ebenfalls SITE_BASE="/"
+const base = process.env.SITE_BASE ?? '/IVF-webseite';
+const site = process.env.SITE_URL ?? 'https://nicolada9-cmd.github.io';
+
 export default defineConfig({
-  site: 'https://nicolada9-cmd.github.io',
-  base: '/IVF-webseite',
+  site,
+  base,
   build: { format: 'directory' },
 });
