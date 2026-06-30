@@ -103,7 +103,9 @@ const jsonld = {
   <!-- AKADEMIE -->
   <section class="section section--soft">
     <div class="container split">
-      <div class="split__panel split__panel--blush" aria-hidden="true"><span class="split__label">Fruchtbarkeit &amp; Du</span></div>
+      <div class="split__media">
+        <img src={u('/img/akademie-fruchtbarkeit.jpg')} alt="Frau mit Tasse im Garten – Gesundheitsakademie Fruchtbarkeit & Du" width="1206" height="843" loading="lazy" />
+      </div>
       <div class="split__text">
         <span class="eyebrow">Gesundheitsakademie</span>
         <h2>Fruchtbarkeit &amp; <em>Du</em></h2>
@@ -222,6 +224,8 @@ const jsonld = {
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
   .split--reverse .split__panel { order: -1; }
   .split__actions { display: flex; gap: 1.4rem; align-items: center; flex-wrap: wrap; margin-top: 0.3rem; }
+  .split__media { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
+  .split__media img { width: 100%; height: 100%; aspect-ratio: 1206 / 843; object-fit: cover; display: block; }
   .split__panel { min-height: 360px; border-radius: var(--radius-lg); display: grid; place-items: center; }
   .split__panel--blush { background: linear-gradient(150deg, #f3e4e9, var(--blush)); }
   .split__panel--cream { background: linear-gradient(150deg, var(--cream-2), var(--cream)); }
