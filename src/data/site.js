@@ -17,25 +17,57 @@ export const site = {
   address: 'Römerstraße 2, 6900 Bregenz, Österreich',
 };
 
-// Hauptnavigation – schlank gehalten (Top-Level uncluttered).
-export const nav = [
-  { label: 'Behandlungen', href: '/behandlungen/' },
-  { label: 'Dein Weg zu uns', href: '/ablauf/' },
-  { label: 'Fruchtbarkeit & Du', href: '/akademie/' },
-  { label: 'Wissen', href: '/wissen/' },
-  { label: 'Für Zuweiser:innen', href: '/zuweiser/' },
-  { label: 'Über uns', href: '/ueber-uns/' },
+// Behandlungen – Menüstruktur & Liste übernommen von ivf.at ("Behandlung"-Menü),
+// ergänzt um die vom Konzern gewünschten neuen Seiten (Andrologie, Hysteroskopie).
+export const treatments = [
+  { slug: 'ivf-icsi', title: 'IVF / ICSI / IMSI', teaser: 'Die Kernverfahren der künstlichen Befruchtung im Labor.', tag: 'Befruchtung' },
+  { slug: 'eizellspende', title: 'Eizellspende', teaser: 'Behandlung mit gespendeten Eizellen – einfühlsam begleitet.', tag: 'Spende', source: 'eizellspende.eu' },
+  { slug: 'regenbogen', title: 'Kinderwunsch für Regenbogenpaare', teaser: 'Wege zum Kind für lesbische & gleichgeschlechtliche Paare.', tag: 'Kinderwunsch' },
+  { slug: 'spermiogramm', title: 'Samenanalyse / Spermiogramm', teaser: 'Abklärung der männlichen Fruchtbarkeit im Labor.', tag: 'Diagnostik' },
+  { slug: 'eizellvorsorge', title: 'Eizellvorsorge / Social Freezing', teaser: 'Fruchtbarkeit für später bewahren – Eizellen einfrieren.', tag: 'Vorsorge', source: 'ovita.eu' },
+  { slug: 'genetik', title: 'Genetik', teaser: 'Genetische Untersuchung für mehr Sicherheit.', tag: 'Genetik', source: 'gentest-embryo.eu' },
+  { slug: 'emotionale-begleitung', title: 'Emotionale Begleitung', teaser: 'Psychologische Unterstützung auf dem Kinderwunschweg.', tag: 'Begleitung' },
+  { slug: 'andrologie', title: 'Andrologie', teaser: 'Männliche Fruchtbarkeit abklären und gezielt behandeln.', tag: 'Diagnostik', neu: true },
+  { slug: 'hysteroskopie', title: 'Hysteroskopie', teaser: 'Gebärmutterspiegelung zur Abklärung vor der Therapie.', tag: 'Diagnostik', neu: true },
 ];
 
-// Behandlungen – inkl. der bisher fehlenden Seiten (Andrologie, Hysteroskopie)
-// und der zu konsolidierenden Themen (Eizellspende, Eizellvorsorge, Genetik).
-export const treatments = [
-  { slug: 'ivf-icsi', title: 'IVF / ICSI / IMSI', teaser: 'Künstliche Befruchtung im Labor – die Kernbehandlungen bei Kinderwunsch.', tag: 'Befruchtung' },
-  { slug: 'insemination', title: 'Insemination (IUI)', teaser: 'Schonende Methode, bei der aufbereitete Spermien direkt eingebracht werden.', tag: 'Befruchtung' },
-  { slug: 'eizellspende', title: 'Eizellspende', teaser: 'Behandlung mit gespendeten Eizellen – umfassend und einfühlsam begleitet.', tag: 'Spende', source: 'eizellspende.eu' },
-  { slug: 'eizellvorsorge', title: 'Eizellvorsorge / Social Freezing', teaser: 'Fruchtbarkeit für später bewahren durch das Einfrieren eigener Eizellen.', tag: 'Vorsorge', source: 'ovita.eu' },
-  { slug: 'andrologie', title: 'Andrologie & Samenanalyse', teaser: 'Männliche Fruchtbarkeit abklären und gezielt behandeln.', tag: 'Diagnostik', neu: true },
-  { slug: 'hysteroskopie', title: 'Hysteroskopie', teaser: 'Gebärmutterspiegelung zur Abklärung und Behandlung vor einer Therapie.', tag: 'Diagnostik', neu: true },
-  { slug: 'genetik-pid', title: 'Genetik & PID', teaser: 'Genetische Untersuchung von Embryonen für mehr Sicherheit.', tag: 'Genetik', source: 'gentest-embryo.eu' },
-  { slug: 'kryo-transfer', title: 'Kryokonservierung & Transfer', teaser: 'Einfrieren und späterer Transfer von Embryonen (Kryozyklus).', tag: 'Labor' },
+// Hauptnavigation – Dropdown-Struktur, an ivf.at orientiert.
+// items mit `children` sind Dropdowns; `external: true` öffnet in neuem Tab.
+export const nav = [
+  {
+    label: 'Wir für Sie',
+    children: [
+      { label: 'Warum zu uns', href: '/warum-zu-uns/' },
+      { label: 'Dein Weg zu uns', href: '/ablauf/' },
+      { label: 'Erstgespräch', href: site.bookingErstgespraech, external: true },
+      { label: 'Kurzgespräch', href: site.bookingKurzgespraech, external: true },
+      { label: 'Kontakt', href: '/kontakt/' },
+    ],
+  },
+  {
+    label: 'Behandlung',
+    href: '/behandlungen/',
+    mega: true, // großes Panel mit Behandlungen
+    children: treatments.map((t) => ({ label: t.title, href: `/behandlungen/${t.slug}/`, teaser: t.teaser, neu: t.neu })),
+  },
+  { label: 'Fruchtbarkeit & Du', href: '/akademie/' },
+  {
+    label: 'Institut',
+    children: [
+      { label: 'Team', href: '/ueber-uns/' },
+      { label: 'Für Zuweiser:innen', href: '/zuweiser/' },
+      { label: 'Wissen & Magazin', href: '/wissen/' },
+      { label: 'Karriere', href: '/karriere/' },
+    ],
+  },
+  {
+    label: 'Qualität',
+    children: [
+      { label: 'Unser Vorgehen', href: '/qualitaet/' },
+      { label: 'Erfahrung & Exzellenz', href: '/qualitaet/#exzellenz' },
+      { label: 'Sicherheit', href: '/qualitaet/#sicherheit' },
+      { label: 'Erfolgsrate', href: '/qualitaet/#erfolgsrate' },
+      { label: 'Kosten', href: '/kosten/' },
+    ],
+  },
 ];

@@ -55,6 +55,25 @@ const jsonld = {
           {c.forWhom.map((item) => <li><Icon name="check" /> <span>{item}</span></li>)}
         </ul>
 
+        {c.sections && c.sections.map((s) => (
+          <div class="t-section">
+            <h2>{s.heading}</h2>
+            {s.paras.map((p) => <p>{p}</p>)}
+          </div>
+        ))}
+
+        {c.table && (
+          <div class="t-tablewrap">
+            <table class="t-table">
+              <caption>{c.table.caption}</caption>
+              <thead><tr>{c.table.head.map((h) => <th>{h}</th>)}</tr></thead>
+              <tbody>
+                {c.table.rows.map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}
+              </tbody>
+            </table>
+          </div>
+        )}
+
         <h2>Ablauf in <em>Schritten</em></h2>
         <ol class="proc">
           {c.steps.map((s, i) => (
@@ -64,6 +83,8 @@ const jsonld = {
             </li>
           ))}
         </ol>
+
+        {c.note && <div class="t-note"><Icon name="lock" /><p>{c.note}</p></div>}
 
         <h2>Häufige <em>Fragen</em></h2>
         <div class="faq">
@@ -108,6 +129,19 @@ const jsonld = {
   .t-grid { display: grid; grid-template-columns: 1fr 320px; gap: 3.5rem; align-items: start; }
   .t-main h2 { margin-top: 2.6rem; }
   .t-main h2:first-child { margin-top: 0; }
+  .t-section p { color: var(--ink-soft); }
+  .t-section h2 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+
+  .t-tablewrap { overflow-x: auto; margin: 1.8rem 0 0.5rem; }
+  .t-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .t-table caption { text-align: left; color: var(--muted); font-size: 0.85rem; margin-bottom: 0.7rem; }
+  .t-table th, .t-table td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--line); }
+  .t-table thead th { color: var(--rose-deep); font-weight: 500; border-bottom: 1.5px solid var(--rose-soft); white-space: nowrap; }
+  .t-table tbody tr:hover { background: var(--bg-soft); }
+
+  .t-note { display: flex; gap: 0.8rem; align-items: flex-start; background: var(--blush); border-radius: var(--radius-lg); padding: 1.1rem 1.4rem; margin-top: 2rem; }
+  .t-note .icon { color: var(--rose); margin-top: 0.2em; flex-shrink: 0; }
+  .t-note p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
 
   .ticklist { list-style: none; padding: 0; margin: 0; }
   .ticklist li { display: flex; gap: 0.7rem; margin-bottom: 0.7rem; align-items: flex-start; }
