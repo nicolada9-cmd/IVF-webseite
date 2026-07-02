@@ -99,9 +99,9 @@ const { heroOverlay = false } = Astro.props;
   .nav__menu { display: flex; align-items: center; gap: 1.4rem; margin-left: auto; }
   .nav__item { position: relative; }
   .nav__link--top {
-    font-size: 0.74rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--ink-soft); padding: 0.4rem 0; white-space: nowrap; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 0.3rem; position: relative; background: none; border: 0;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink); padding: 0.4rem 0; white-space: nowrap; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 0.32rem; position: relative; background: none; border: 0;
   }
   .nav__link--top .chev { width: 0.72em; height: 0.72em; opacity: 0.6; transition: transform 0.25s ease; }
   .nav__item:hover .chev, .nav__item:focus-within .chev { transform: rotate(180deg); }
@@ -109,30 +109,31 @@ const { heroOverlay = false } = Astro.props;
   .nav__link--top:hover, .nav__item:hover .nav__link--top, .nav__item:focus-within .nav__link--top { color: var(--rose); }
   .nav__item:hover .nav__link--top::after, .nav__link--top:hover::after { width: 100%; }
 
-  /* Dropdown */
+  /* Dropdown – weich getöntes, stark abgerundetes Panel (Fertty-Stil) */
   .dropdown {
-    position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
-    background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md); padding: 0.5rem; min-width: 250px;
+    position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(8px);
+    background: rgba(247, 238, 241, 0.97); backdrop-filter: blur(14px);
+    border: 0; border-radius: 22px;
+    box-shadow: 0 14px 40px rgba(36, 31, 38, 0.14); padding: 1.1rem; min-width: 260px;
     opacity: 0; visibility: hidden; transition: opacity 0.22s ease, transform 0.22s ease; z-index: 80;
   }
-  .dropdown::before { content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+  .dropdown::before { content: ''; position: absolute; top: -18px; left: 0; right: 0; height: 18px; }
   .nav__item:hover .dropdown, .nav__item:focus-within .dropdown {
     opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
   }
-  .dropdown--mega { left: 0; transform: translateX(0) translateY(8px); width: min(640px, 78vw); }
+  .dropdown--mega { left: 0; transform: translateX(0) translateY(8px); width: min(660px, 80vw); padding: 1.3rem; }
   .nav__item:hover .dropdown--mega, .nav__item:focus-within .dropdown--mega { transform: translateX(0) translateY(0); }
 
-  .submenu { display: flex; flex-direction: column; }
-  .submenu__item { padding: 0.62rem 0.9rem; border-radius: 8px; font-size: 0.92rem; color: var(--ink-soft); white-space: nowrap; }
-  .submenu__item:hover { background: var(--blush); color: var(--rose-deep); }
+  .submenu { display: flex; flex-direction: column; gap: 0.1rem; }
+  .submenu__item { padding: 0.72rem 1.1rem; border-radius: 12px; font-size: 0.95rem; color: var(--ink-soft); white-space: nowrap; transition: background 0.2s ease, color 0.2s ease; }
+  .submenu__item:hover { background: #fff; color: var(--rose-deep); }
 
-  .mega { display: grid; grid-template-columns: 1fr 1fr; gap: 0.15rem; }
-  .mega__item { padding: 0.7rem 0.9rem; border-radius: 8px; display: flex; flex-direction: column; gap: 0.15rem; }
-  .mega__item:hover { background: var(--blush); }
-  .mega__title { font-size: 0.94rem; font-weight: 500; color: var(--ink); display: flex; align-items: center; gap: 0.4rem; }
+  .mega { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem; }
+  .mega__item { padding: 0.85rem 1rem; border-radius: 14px; display: flex; flex-direction: column; gap: 0.2rem; transition: background 0.2s ease; }
+  .mega__item:hover { background: #fff; }
+  .mega__title { font-size: 0.98rem; font-weight: 500; color: var(--ink); display: flex; align-items: center; gap: 0.4rem; }
   .mega__item:hover .mega__title { color: var(--rose-deep); }
-  .mega__teaser { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+  .mega__teaser { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
   .mega__neu { font-style: normal; color: var(--rose); border: 1px solid var(--rose-soft); padding: 0 0.35rem; border-radius: var(--radius-pill); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; }
 
   .nav__actions { display: flex; align-items: center; gap: 1.3rem; margin-left: 1.5rem; }
